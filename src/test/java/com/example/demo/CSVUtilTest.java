@@ -90,7 +90,7 @@ public class CSVUtilTest {
         List<Player> list = CsvUtilFile.getPlayers();
         Flux<Player> listFlux = Flux.fromStream(list.parallelStream()).cache();
         Mono<Map<String, Collection<Player>>> listFilter = listFlux
-                .sort((p1, p2) -> Math.max(p1.getWinners(), p1.getWinners()))
+                .sort((player1, player2) -> Math.max(player1.getWinners(), player2.getWinners()))
                 .buffer(100)
                 .flatMap(playerA -> listFlux
                         .filter(playerB -> playerA.stream()
